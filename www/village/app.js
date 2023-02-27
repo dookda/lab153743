@@ -31,6 +31,9 @@ function removeMarker() {
 function postBylatlng(latlng) {
     removeMarker()
     const buffer = document.getElementById("buffer").value
+
+    L.circle([latlng.lat, latlng.lng], { radius: buffer, name: "mymarker" }).addTo(map);
+
     axios.post('/api/getvillage', {
         lat: latlng.lat,
         lng: latlng.lng,
@@ -51,8 +54,20 @@ map.on("click", (r) => {
     postBylatlng(r.latlng)
 })
 
+function showPosition(e) {
+    let lat = e.coords.latitude
+    let lng = e.coords.longitude
+    let acc = e.coords.accuracy
 
-// call function area
-// getAllVillage()
+    let latlng = { lat, lng }
+    postBylatlng(latlng)
+
+    L.marker([lat, lng]).addTo(map).bindPopup("ตำแหน่งของฉัน")
+
+}
+
+function getGPS() {
+    navigator.geolocation.getCurrentPosition(showPosition);
+}
 
 osm.addTo(map);

@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <div id="map"></div>
+
     <p>
         เลือกระยะ
     </p>
@@ -21,6 +21,10 @@
         <option value="2000">2km</option>
         <option value="3000">3km</option>
     </select>
+
+    <button onclick="getGPS()">ค้นตำแหน่งจาก GPS</button>
+    <p></p>
+    <div id="map"></div>
 </body>
 
 <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
